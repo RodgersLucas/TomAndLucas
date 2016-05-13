@@ -10,6 +10,7 @@ package deliverygame;
  * @author Tom Hall and Lucas Rodgers
  */
 
+import deliverygame.model.Player;
 import java.util.Scanner;
 
 public class DeliveryGame {
@@ -37,9 +38,18 @@ public class DeliveryGame {
     }
     
     public static void main(String[] args) {
+        
+        Scanner input = new Scanner(System.in);
+        
         System.out.println("***** HELLO!  Welcome to The Delivery Game!!! *****\n"
                 + "There are " + DeliveryGame.getNumOfStreets() + " streets that you could go down!\n"
                 + "Have fun!!!");
+        
+        //Get the user name and set it to player
+        System.out.println("\n\nWhat is your name?");
+        Player newPlayer = new Player();
+        newPlayer.setName( input.next() );
+        System.out.println("That's a lovely name, " + newPlayer.getName());
         
         //Loops through menu until a correct value is chosen
         do{System.out.println("\n\nWhat would you like to do?\n"
@@ -48,12 +58,16 @@ public class DeliveryGame {
                 + "3. Quit\n"
                 + "(Enter 1, 2, or 3)");
         
-            Scanner input = new Scanner(System.in);
+            
             DeliveryGame.setChoice( input.next());} 
         while(!"1".equals(DeliveryGame.getChoice()) && !"2".equals(DeliveryGame.getChoice()) && !"3".equals(DeliveryGame.getChoice()));
         //End of menu loop
         
-        System.out.println(DeliveryGame.getChoice());
+        // Show user's choice
+        //TODO make the program do stuff based on input
+        System.out.println("Your choice was " + DeliveryGame.getChoice());
+        
+        
         
     }
     
