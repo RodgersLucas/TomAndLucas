@@ -5,27 +5,69 @@
  */
 package deliverygame.model;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  *
  * @author rjhall7
  */
-public class Player {
-    private static String name;
-    private static double bestTime;
-    
-    public static void setName( String newName ){
-        name = newName;
+public class Player implements Serializable{
+    private String name;
+    private double bestTime;
+
+    public Player() {
     }
     
-    public static String getName(){
+    public void setName( String name ){
+        this.name = name;
+    }
+    
+    public String getName(){
         return name;
     }
     
-    public static void setTime ( double newBestTime ){
-        bestTime = newBestTime;
+    public void setTime ( double bestTime ){
+        this.bestTime = bestTime;
     }
     
-    public static double getTime () {
+    public double getTime () {
         return bestTime;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.bestTime) ^ (Double.doubleToLongBits(this.bestTime) >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Player other = (Player) obj;
+        if (Double.doubleToLongBits(this.bestTime) != Double.doubleToLongBits(other.bestTime)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" + "name=" + name + ", bestTime=" + bestTime + '}';
+    }
+    
+    
 }
